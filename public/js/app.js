@@ -1058,6 +1058,17 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a);
 const app = new Vue({
     el: '#app'
 });**/
+var app = new Vue({
+  el: '#app',
+  data: {}
+});
+
+$(document).ready(function () {
+  //  Dropdowns
+  $('.dropdown').hover(function (e) {
+    $(this).toggleClass('is-open');
+  });
+});
 
 /***/ }),
 /* 12 */
