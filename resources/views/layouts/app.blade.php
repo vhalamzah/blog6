@@ -8,89 +8,68 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Buzz Markets</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-<nav class="navbar has-shadow" >
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item is-paddingless brand-item" href="{{route('home')}}">
-        <img src="{{asset('images/devmarketer-logo.png')}}" alt="DevMarketer logo">
-      </a>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
 
-    <!--  @if (Request::segment(1) == "manage")
-        <a class="navbar-item is-hidden-desktop" id="admin-slideout-button">
-          <span class="icon">
-            <i class="fa fa-arrow-circle-right"></i>
-          </span>
-        </a>
-      @endif-->
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-      <button class="button navbar-burger">
-       <span></span>
-       <span></span>
-       <span></span>
-     </button>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item is-tab is-active">About</a>
-        <a class="navbar-item is-tab">Services</a>
-        <a class="navbar-item is-tab">Gallery</a>
-        <a class="navbar-item is-tab">Team</a>
-        <a class="navbar-item is-tab">Blog</a>
-        <a class="navbar-item is-tab">Contact Us</a>
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                </div>
 
-      </div> <!-- end of .navbar-start -->
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
 
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-      <div class="navbar-end nav-menu" style="overflow: visible">
-        @guest
-          <a href="{{route('login')}}" class="navbar-item is-tab">Login</a>
-          <a href="{{route('register')}}" class="navbar-item is-tab">Join the Community</a>
-        @else
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Hey {{Auth::user()->name}}</a>
-            <div class="navbar-dropdown is-right" >
-              <a href="#" class="navbar-item">
-                <span class="icon">
-                  <i class="fa fa-fw fa-user-circle-o m-r-5"></i>
-                </span>Profile
-              </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
 
-              <a href="#" class="navbar-item">
-                <span class="icon">
-                  <i class="fa fa-fw fa-bell m-r-5"></i>
-                </span>Notifications
-              </a>
-              <a href="#" class="navbar-item">
-                <span class="icon">
-                  <i class="fa fa-fw fa-cog m-r-5"></i>
-                </span>Manage
-              </a>
-              <hr class="navbar-divider">
-              <a href="{{route('logout')}}" class="navbar-item" onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
-                <span class="icon">
-                  <i class="fa fa-fw fa-sign-out m-r-5"></i>
-                </span>
-                Logout
-              </a>
-              
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-          </div>
-        @endguest
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
+        </nav>
 
         @yield('content')
     </div>
