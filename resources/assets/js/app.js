@@ -7,10 +7,17 @@
 
 require('./bootstrap');
 
+window.Slug = require('slug');
+
 window.Vue = require('vue');
 
+Slug.defaults.mode = 'rfc3986';
 import Buefy from 'buefy';
  Vue.use(Buefy);
+
+
+Vue.component('slug-widget', require('./components/slugWidget.vue'));
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -23,14 +30,26 @@ import Buefy from 'buefy';
 const app = new Vue({
     el: '#app'
 });**/
-var app= new Vue({
+/*var app= new Vue({
 	el: '#app',
 	data: {}
-});
-
+});*/
+require('./manage');
 $(document).ready(function() {
   //  Dropdowns
   $('.dropdown').hover(function(e) {
     $(this).toggleClass('is-open')
   })
 })
+
+
+
+
+
+
+// var app = new Vue({
+//   el: '#app',
+//   data: {}
+// });
+
+
